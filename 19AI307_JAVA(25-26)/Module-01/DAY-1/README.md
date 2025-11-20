@@ -21,8 +21,8 @@ To write a Java program to declare, initialize, and print variables of all primi
  ```
 /*
 Program to implement variables and Operators using Java
-Developed by: YOHESH KUMAR R.M
-RegisterNumber:  212222240118
+Developed by: SUDHAKAR K
+RegisterNumber:  212222240107
 */
 ```
 
@@ -66,6 +66,7 @@ class prog{
 
 ## RESULT:
 Thus, the Java program to demonstrate all data types by declaring, initializing, and printing them was successfully compiled and executed.
+
 
 
 
