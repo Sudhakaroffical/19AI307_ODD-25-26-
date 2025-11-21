@@ -53,3 +53,4 @@ public class A implements Runnable {
 The program successfully creates a thread with a user-given name, prints its priority and name, and displays the thread details when executed.
 
 
+
