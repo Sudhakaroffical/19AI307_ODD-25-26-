@@ -1,39 +1,43 @@
-# Ex.No:1(D) ARRAYS
-
-### Name: SUDHAKAR K
-### Reg No: 212222240107
+# Ex.No:4(D) DESIGN PATTERN - ABSTRACT FACTORY
 
 ## QUESTION:
-Write a Java program to find the index of a given element in an array
+You’re creating a cross-platform UI tool using the Abstract Factory pattern. Implement factories to create Button and Checkbox for "dark" and "light" themes. Let the user choose the theme, then generate UI components and display their types.
 
 ## AIM:
-To write a Java program that reads an array of integers and finds the index of a given element within the array.
+To implement the **Abstract Factory Design Pattern** in Java by creating UI components (Buttons and Checkboxes) for two different themes—Dark and Light.  
+Based on user input, the appropriate factory should generate the correct themed UI elements.
 
 ## ALGORITHM :
-1.Start the program and read the size of the array n.
-
-2.Read n integer elements and store them in the array a[ ].
-
-3.Read the element x whose index needs to be found.
-
-4.Traverse the array from index 0 to n-1:
-
-     If a[i] == x, print the index i and terminate the program.
-
-5.If the loop finishes without a match, print "Element not found".
-
-6.End the program.	
-
-
-
-
+1. Define two interfaces:
+   - `Button` with method `render()`
+   - `Checkbox` with method `render()`
+2. Create concrete classes for **Dark** and **Light** themes:
+   - `DarkButton`, `LightButton`
+   - `DarkCheckbox`, `LightCheckbox`
+3. Define the `UIFactory` interface with:
+   - `createButton()`
+   - `createCheckbox()`
+4. Create concrete factories:
+   - `DarkThemeFactory` implements `UIFactory`
+     - Returns dark-themed button and checkbox
+   - `LightThemeFactory` implements `UIFactory`
+     - Returns light-themed button and checkbox
+5. In the `main` method:
+   - Read the theme name from user input.
+   - If theme is `"dark"` → use `DarkThemeFactory`
+   - If theme is `"light"` → use `LightThemeFactory`
+   - Otherwise print `"Invalid theme"` and exit.
+6. Use the chosen factory to:
+   - Create a button and render it.
+   - Create a checkbox and render it.
+7. End the program.
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Array concept using Java
+Program to implement a conditional statement using Java
 Developed by: SUDHAKAR K
-RegisterNumber: 212222240107
+RegisterNumber:  212222240107
 */
 ```
 
@@ -41,41 +45,107 @@ RegisterNumber: 212222240107
 ```
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int a[] = new int[n];
-        for (int i = 0; i < n; i++) 
+interface Button
+{ 
+    void render();
+}
+interface Checkbox 
+{ 
+    void render();
+}
+
+class DarkButton implements Button 
+{
+    public void render()
+    { 
+        System.out.println("Dark Button created"); 
+    }
+}
+
+class LightButton implements Button 
+{
+    public void render() 
+    {
+        System.out.println("Light Button created"); 
+    }
+}
+
+class DarkCheckbox implements Checkbox
+{
+    public void render() 
+    { 
+        System.out.println("Dark Checkbox created"); 
+    }
+}
+
+class LightCheckbox implements Checkbox
+{
+    public void render() 
+    { 
+        System.out.println("Light Checkbox created");
+    }
+}
+
+interface UIFactory 
+{
+    Button createButton();
+    Checkbox createCheckbox();
+}
+
+class DarkThemeFactory implements UIFactory
+{
+    public Button createButton()
+    {
+        return new DarkButton(); 
+    }
+    public Checkbox createCheckbox() 
+    { 
+        return new DarkCheckbox();
+    }
+}
+
+class LightThemeFactory implements UIFactory 
+{
+    public Button createButton() 
+    {
+        return new LightButton();
+    }
+    public Checkbox createCheckbox() 
+    {
+        return new LightCheckbox(); 
+    }
+}
+
+public class Main 
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        String theme = scanner.nextLine().toLowerCase();
+        UIFactory factory;
+        if (theme.equals("dark")) factory = new DarkThemeFactory();
+        else if (theme.equals("light")) factory = new LightThemeFactory();
+        else
         {
-        a[i] = sc.nextInt();
+            System.out.println("Invalid theme");
+            return;
         }
-        
-        int x = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            if (a[i] == x) {
-                System.out.println(i);
-                return;
-            }
-            
-        }
-        System.out.println("Element not found");
-        
+        factory.createButton().render();
+        factory.createCheckbox().render();
     }
 }
 ```
 
-
-
-
 ## OUTPUT:
-<img width="558" height="590" alt="image" src="https://github.com/user-attachments/assets/0d53717f-affe-4aaf-b448-35ef728bee48" />
-
-
+<img width="692" height="278" alt="image" src="https://github.com/user-attachments/assets/cd0411f1-afc3-48cb-a31d-b10a027d9ae3" />
 
 ## RESULT:
-Therefore the program successfully searches the array for the given element.
+The program successfully demonstrates the **Abstract Factory Pattern** by creating theme-specific UI components.  
+Based on user input, the correct factory is selected, and it generates:
 
+- A *Dark Button* and *Dark Checkbox* **or**
+- A *Light Button* and *Light Checkbox*
 
+Both components are rendered in the output according to the selected theme.
 
 
